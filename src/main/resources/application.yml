@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: FeignServer
+server:
+  port: 3001
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:18090/eureka/
+
+# 配置hystrix的熔断时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisenconds: 3000
+
+# 配置hystrix开启，false后将不熔断
+feign:
+  hystrix:
+    enabled: true
